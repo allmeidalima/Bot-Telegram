@@ -7,7 +7,7 @@ class Wolf():
             self.memory = open('memoria.json', 'r')
         except FileNotFoundError:
             self.memory = open('memoria.json', 'w')
-            self.memory.write('''[["WOLF", "Lucas", "Claudia"], {"Bom dia" : "Bom dia", "Boa tarde" : "Boa tarde", "Boa noite" : "Boa noite", "Como você esta?" : "Eu estou bem, obrigado por perguntar."}]''')
+            self.memory.write('''[["WOLF", "Lucas", "Claudia"], {"Bom dia" : "Bom dia", "Boa tarde" : "Boa tarde", "Boa noite" : "Boa noite", "Como você esta?" : "Eu estou bem, obrigado por perguntar.", "Quem te criou?" : "Meu criador se chama Lucas ele é meu Deus!", "Quem o Lucas ama?" : "Mais é claro que é a Claudinha"}]''')
             self.memory.close()
             self.memory = open('memoria.json', 'r')
 
@@ -21,6 +21,8 @@ class Wolf():
     def think(self, phrase):
         if phrase in self.message:
             return self.message[phrase]
+        if phrase not in self.message:
+            return 'Não sei responder isso ainda, mas garanto pra você que uma hora eu aprendo!'
 
     def speak(self, bot_phrase):
         self.historic.append(bot_phrase)

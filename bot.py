@@ -1,4 +1,9 @@
 import json
+import sys, os, webbrowser
+import subprocess as sp
+from subprocess import Popen 
+
+
 
 class Wolf():
 
@@ -21,7 +26,21 @@ class Wolf():
     def think(self, phrase):
         if phrase in self.message:
             return self.message[phrase]
-        if phrase not in self.message:
+        elif 'Abra link' in phrase:
+            def openLink(linkPhrase):
+                platform = sys.platform
+                link = linkPhrase.replace('Abra link ', '')
+                if 'win' in platform:
+                    os.startfile(link)
+                elif 'linux' in platform:
+                    try:
+                        sp.Popen(link)
+                    except FileNotFoundError:
+                        sp.Popen(['xdg-open', link])
+                elif 'darwin' in platform:
+                    webbrowser.open(link)
+            openLink(phrase)
+        elif phrase not in self.message:
             return 'Não sei responder isso ainda, mas garanto pra você que uma hora eu aprendo!'
 
     def speak(self, bot_phrase):
